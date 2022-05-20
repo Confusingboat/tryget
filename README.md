@@ -16,16 +16,34 @@ Package manager console:
 Dotnet CLI:  
 `dotnet add package tryget`
 
-## Examples
+## Quick Start
 
-Import library
 ```csharp
 using TryGet;
 ```
 
+```csharp
+// Check if the key exists
+if (dictionary.TryGet("key")) { }
+
+// Check if the key exists and can be cast to string
+if (dictionary.TryGet("key").As<string>()) { }
+
+// Capture the value at key "key" if it exists and can be cast to string, otherwise default
+var val = dictionary.TryGet("key").As<string>().OrDefault();
+
+// Same as above, but with custom default value
+var val = dictionary.TryGet("key").As<string>().OrDefault("Not a string.");
+
+```
+
+## More Examples
+
 Let's set up our dictionary.
 
-**TryGet** works on any `IDictionary<TKey, TValue>`, but it's most useful on `<string, object>` dictionaries commonly used to pass custom data, so we'll use one of those first.
+**TryGet** works on any `IDictionary<TKey, TValue>`, but it's most useful on `<string, object>` dictionaries commonly used to pass custom data.
+
+We will assume this dictionary exists for our examples.
 
 ```csharp
 var dictionary = new Dictionary<string, object>
