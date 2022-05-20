@@ -4,14 +4,17 @@ namespace TryGet
 {
     public class TryGetResult
     {
+        private readonly object _value;
+
         public bool IsSuccess { get; }
-        public object Value { get; }
 
         public TryGetResult(bool isSuccess, object value)
         {
             IsSuccess = isSuccess;
-            Value = value;
+            _value = value;
         }
+
+        public object Value => IsSuccess ? _value : throw new NoValueException();
 
         public TryGetResult<T> As<T>()
         {
@@ -40,7 +43,7 @@ namespace TryGet
 
         public new T Value => IsSuccess ? _value : throw new NoValueException();
 
-        public T OrDefault() => IsSuccess ? Value : default;
+        public T OrDefault(T value = default) => IsSuccess ? Value : value;
 
         public static implicit operator T(TryGetResult<T> value) => value.Value;
     }
