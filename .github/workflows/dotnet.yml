@@ -22,6 +22,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Bump build version
+      if: ${{ false }}
       id: bump
       uses: vers-one/dotnet-project-version-updater@v1.0
       with:
