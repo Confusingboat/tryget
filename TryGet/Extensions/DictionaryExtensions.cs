@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace TryGet
+namespace TryGet.Extensions
 {
-    public static class TryGetExtensions
+    public static class ReadOnlyTryGetExtensions
     {
         public static TryGetResult<TValue> TryGet<TKey, TValue>(
-            this IDictionary<TKey, TValue> dictionary,
+            this IReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key)
         {
             var success = dictionary.TryGetValue(key, out var val);

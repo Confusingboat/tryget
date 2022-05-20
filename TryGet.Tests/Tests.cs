@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using NUnit.Framework;
+using TryGet.Extensions;
 
 namespace TryGet.Tests
 {
@@ -197,6 +199,17 @@ namespace TryGet.Tests
 
             Assert.That(result.IsSuccess, Is.True);
             Assert.That(result.Value, Is.AssignableTo<Cat>());
+        }
+
+        [Test]
+        public void Test_ReadOnlyDictionary()
+        {
+            if (((IReadOnlyDictionary<string, object>)new ReadOnlyDictionary<string, object>(TestSet)).TryGet("string"))
+            {
+                Assert.Pass();
+            }
+
+            Assert.Fail();
         }
     }
 
