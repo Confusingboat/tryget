@@ -22,13 +22,16 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Bump build version
+      if: ${{ false }}
       id: bump
       uses: vers-one/dotnet-project-version-updater@v1.0
       with:
         file: "TryGet/TryGet.csproj"
         version: bump-build
 
-    - run: |
+    - name: Commit new version
+      if: ${{ false }}
+      run: |
         git config user.name "Confusingboat"
         git config user.email "confusingboat@users.noreply.github.com"
         git add .
