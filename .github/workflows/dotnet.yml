@@ -27,7 +27,7 @@ jobs:
       with:
         file: "TryGet/TryGet.csproj"
         version: bump-build
-    - name: Get color
+    - name: Echo versions
       run: echo "Versions are ${{ steps.bump.outputs.oldVersion }} & ${{ steps.bump.outputs.newVersion }}"
     - name: Commit new version
       if: ${{ false }}
