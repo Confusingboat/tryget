@@ -23,6 +23,19 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Bump build version
+      id: bump
+      uses: vers-one/dotnet-project-version-updater@v1.0
+      with:
+        file: "src/MyProject.csproj"
+        version: bump-build
+
+    - run: |
+        git config user.name "Confusingboat"
+        git config user.email "confusingboat@users.noreply.github.com"
+        git add .
+        git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
+        git push
     - name: Publish NuGet
       # You may pin to the exact commit or the version.
       # uses: brandedoutcast/publish-nuget@c12b8546b67672ee38ac87bea491ac94a587f7cc
