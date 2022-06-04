@@ -1,5 +1,7 @@
 ## TryGet
 
+![Nuget](https://img.shields.io/nuget/v/tryget)
+![Nuget](https://img.shields.io/nuget/dt/tryget)
 [![.NET](https://github.com/Confusingboat/tryget/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Confusingboat/tryget/actions/workflows/dotnet.yml)
 
 #### Simple, fluent dictionary value retrieval.
