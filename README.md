@@ -4,11 +4,21 @@
 ![Nuget](https://img.shields.io/nuget/dt/tryget)
 [![.NET](https://github.com/Confusingboat/tryget/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Confusingboat/tryget/actions/workflows/dotnet.yml)
 
-#### Simple, fluent dictionary value retrieval.
+### Simple, fluent dictionary value retrieval.
 
-The only available platforms are `NETSTANDARD1.1` and `NETSTANDARD2.0`, which should provide enough compatibility for most applications.
+**As anyone familiar wth C# knows, you cannot use the `as` or `is` keyword to change or check types with the `out var` syntax.**  
 
-[See here](https://docs.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-1-1) for a complete compatibility matrix.
+For example, something like this is not possible:
+```csharp
+var dictionary = new Dictionary<string, object>();
+
+if (dictionary.TryGetValue("key", out as string val))
+{
+
+}
+```
+
+**This project aims to address that issue.**
 
 ## Install
 
@@ -36,6 +46,9 @@ var val = dictionary.TryGet("key").As<string>().OrDefault();
 
 // Same as above, but with custom default value
 var val = dictionary.TryGet("key").As<string>().OrDefault("Not a string.");
+
+// Check if the key exists and capture the value with 'out' keyword
+if (dictionary.TryGet("key").As<string>(out var val)) { }
 
 ```
 
@@ -140,6 +153,20 @@ var val = dictionary.TryGet("number").As<string>().OrDefault();
 var val = dictionary.TryGet("number").As<string>().OrDefault("Not a string.");
 
 // val = "Not a string."
+```
+
+You can also perform a check and capture the value with `out`
+```csharp
+if (dictionary.TryGet("number").As(out var val))
+{
+    // val = 15 (boxed to an object)
+}
+```
+The real value-add here is being able to cast with `out`
+```csharp
+if (dictionary.TryGet("number").As<int>(out var val)){
+    // val = 15
+}
 ```
 ## Using the TryGet result
 Calling `.TryGet()` returns a result of type `TryGetResult<TValue>`, which can be used directly instead of the fluent methods.

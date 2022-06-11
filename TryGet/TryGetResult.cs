@@ -25,7 +25,7 @@ namespace TryGet
         public bool As<T>(out T value)
         {
             var result = As<T>();
-            value = result.Value;
+            value = result.OrDefault();
             return result.IsSuccess;
         }
 
@@ -42,6 +42,8 @@ namespace TryGet
         }
 
         public new T Value => IsSuccess ? _value : throw new NoValueException();
+
+        public bool As(out T value) => As<T>(out value);
 
         public T OrDefault(T value = default) => IsSuccess ? Value : value;
 

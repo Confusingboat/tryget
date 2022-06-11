@@ -211,6 +211,72 @@ namespace TryGet.Tests
 
             Assert.Fail();
         }
+
+        [Test]
+        public void Test_Positive_TryGet_As_Out()
+        {
+            var result = TestSet.TryGet("string").As<string>(out var stringValue);
+
+            Assert.That(result, Is.True);
+            Assert.That(stringValue, Is.EqualTo("string"));
+        }
+
+        [Test]
+        public void Test_Negative_TryGet_As_Out()
+        {
+            var result = TestSet.TryGet("bool").As<string>(out var stringValue);
+
+            Assert.That(result, Is.False);
+            Assert.That(stringValue, Is.Null);
+        }
+
+        [Test]
+        public void Test_Positive_TryGet_AsUntyped_Out()
+        {
+            var result = TestSet.TryGet("string").As(out var objectValue);
+
+            Assert.That(result, Is.True);
+            Assert.That(objectValue, Is.EqualTo("string"));
+        }
+
+        [Test]
+        public void Test_Negative_TryGet_AsUntyped_Out()
+        {
+            var result = TestSet.TryGet("stringz").As(out var objectValue);
+
+            Assert.That(result, Is.False);
+            Assert.That(objectValue, Is.Null);
+        }
+
+        [Test]
+        public void Test_Positive_TryGet_As_Out_ValueType()
+        {
+            var dictionary = new Dictionary<string, int>
+            {
+                { "one", 1 },
+                { "two", 2 }
+            };
+
+            var result = dictionary.TryGet("one").As(out var intValue);
+
+            Assert.That(result, Is.True);
+            Assert.That(intValue, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Test_Negative_TryGet_As_Out_ValueType()
+        {
+            var dictionary = new Dictionary<string, int>
+            {
+                { "one", 1 },
+                { "two", 2 }
+            };
+
+            var result = dictionary.TryGet("four").As(out var intValue);
+
+            Assert.That(result, Is.False);
+            Assert.That(intValue, Is.Zero);
+        }
     }
 
     class Animal { }
