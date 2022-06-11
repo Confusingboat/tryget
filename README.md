@@ -1,10 +1,10 @@
-## TryGet
+# TryGet
+
+## Simple, fluent dictionary value retrieval.
 
 ![Nuget](https://img.shields.io/nuget/v/tryget)
 ![Nuget](https://img.shields.io/nuget/dt/tryget)
 [![.NET](https://github.com/Confusingboat/tryget/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Confusingboat/tryget/actions/workflows/dotnet.yml)
-
-### Simple, fluent dictionary value retrieval.
 
 **As anyone familiar wth C# knows, you cannot use the `as` or `is` keyword to change or check types with the `out var` syntax.**  
 
@@ -12,15 +12,12 @@ For example, something like this is not possible:
 ```csharp
 var dictionary = new Dictionary<string, object>();
 
-if (dictionary.TryGetValue("key", out as string val))
-{
-
-}
+if (dictionary.TryGetValue("key", out as string val)) { }
 ```
 
 **This project aims to address the above desired use case.**
 
-## Install
+# Install
 
 Package manager console:  
 `install-package tryget`
@@ -28,7 +25,7 @@ Package manager console:
 Dotnet CLI:  
 `dotnet add package tryget`
 
-## Quick Start
+# Quick Start
 
 ```csharp
 using TryGet;
@@ -69,7 +66,7 @@ var dictionary = new Dictionary<string, object>
 };
 ```
 
-#### Check if a value
+### Check if a value
 
 **...exists**
 ```csharp
@@ -127,7 +124,7 @@ if (animals.TryGet("cat").As<object>().As<Animal>().As<Cat>())
 }
 ```
 
-#### Get a value
+### Get a value
 **...if it exists**
 ```csharp
 var val = dictionary.TryGet("number");
