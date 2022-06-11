@@ -18,7 +18,7 @@ if (dictionary.TryGetValue("key", out as string val))
 }
 ```
 
-**This project aims to address that issue.**
+**This project aims to address the above desired use case.**
 
 ## Install
 
